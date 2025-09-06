@@ -1,0 +1,13 @@
+test_model/
+Test/
+Models/
+Docs/
+Code/
+ai-assistant/
+.ipynb_checkpoints/
+
+Data/*
+
+!Data/iot_faiss_en_new/
+!Data/dummy_iot_dataset_last_en.csv
+!Data/iot_readable_last_en.txt

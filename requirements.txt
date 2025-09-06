@@ -1,0 +1,15 @@
+transformers
+torch torchvision --index-url https://download.pytorch.org/whl/cu129
+accelerate
+jupyterlab
+pandas
+numpy
+langchain
+langchain-community
+sentence-transformers
+langchain-google-genai
+accelerate
+bitsandbytes
+faiss-cpu (veya gpu)
+streamlit
+langdetect
