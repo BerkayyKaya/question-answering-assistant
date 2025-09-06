@@ -1,8 +1,8 @@
-test_model/
+test_model/*
 Test/
 Models/
 Docs/
-Code/
+Code/*
 ai-assistant/
 .ipynb_checkpoints/
 
@@ -11,3 +11,7 @@ Data/*
 !Data/iot_faiss_en_new/
 !Data/dummy_iot_dataset_last_en.csv
 !Data/iot_readable_last_en.txt
+!Code/dummy_iot_dataset.ipynb
+!test_model/demo-phi3-mini-instruct.ipynb
+!test_model/mistral-7b-instruct.ipynb
+!test_model/demo-google-genai.ipynb
