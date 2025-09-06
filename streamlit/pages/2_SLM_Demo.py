@@ -5,14 +5,20 @@ import torch
 import os
 import json
 import re
+from dotenv import load_dotenv
 
 from langchain_community.document_loaders import TextLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.docstore.document import Document
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
+from huggingface_hub import login
 
 from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
+
+load_dotenv()
+
+huggingface_api_key = os.environ.get("HUGGINGFACEHUB_API_TOKEN")
 
 st.set_page_config("Küçük Dil Modeli Demo", page_icon="https://img.icons8.com/?size=100&id=pnUfrhjBRScY&format=png&color=000000")
 
@@ -155,6 +161,7 @@ def initialize_decoder_tokenizer():
         print(f"Decoder Tokenizeri {local_tokenizer_path} Klasöründen Başarıyla Yüklendi!\n")
     else:
         print("Local Tokenizer Bulunamadı Online Olarak İndiriliyor...")
+        login(token=huggingface_api_key)
         tokenizer = AutoTokenizer.from_pretrained(decoder_name)
         print("Tokenizer Başarıyla İndirildi!\n")
     return tokenizer
@@ -191,6 +198,8 @@ def initialize_decoder():
             print(f"Decoder Modeli {local_decoder_path} Klasöründen Başarıyla Yüklendi!")
     else:
         print("Local Model Bulunamadı Online Olarak İndiriliyor...")
+        login(token=huggingface_api_key)
+        
         if quantization_config:
             print(f"Decoder modeli {torch.cuda.get_device_name(0)} isimli GPU üzerine yükleniyor...")
             model = AutoModelForCausalLM.from_pretrained(decoder_name, quantization_config=quantization_config, device_map="auto")
