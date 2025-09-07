@@ -31,6 +31,13 @@ Use the package manager
 
 - **LangChain:** To build the assistant logic and RAG integration.
 
+## Important Note Before You Begin
+**Please review these key requirements before setting up the project.**
+- **The LLM (Large Language Model) Demo** requires a personal Google API Key to function. You will need to obtain this key yourself.
+- **The SLM (Small Language Model) Demo runs locally** but needs to download a large model file (approximately 16 GB) on its first run. Please ensure you have sufficient disk space and SLM Demo's model requires **GPU at least 4GB VRAM**. If the system does not have a GPU, the model will run on the CPU and everything will be slower.
+
+If you wish to proceed, you can find the detailed setup instructions in the [About Initializing Project](#about-initializing-project) section below.
+
 ## About Initializing Project
 **To run this project on your local machine, follow the steps below.**
 
@@ -68,7 +75,36 @@ Install all the Python libraries required to run the project from the requiremen
 pip install -r requirements.txt
 ```
 
-### 5. Start the Demo
+### 5. Configure API Keys
+**If you will use LLM_Demo section before starting the demo you should get Generative Language API key for LLM_Demo section.**
+
+#### Using the LLM Demo (Requires Google API Key)
+The LLM (Large Language Model) demo uses Google's Generative Language API. To use it, you need to provide your own API key.
+
+1. Go to the [Google Cloud Console](https://console.cloud.google.com/).
+
+2. Create a new project.
+
+3. Enable the Generative Language API for your project.
+
+4. Create an API key from the "Credentials" section.
+
+5. Once you have your API key, add it to the .env file in the project's root directory. Replace the placeholder YOUR_GOOGLE_API_KEY with your key:
+
+```bash
+# .env File Before
+GOOGLE_API_KEY="YOUR_GOOGLE_API_KEY"
+
+# After
+GOOGLE_API_KEY="aIzaSyD...your...real...key...4e5f6g"
+```
+
+#### Using the SLM Demo (Local Model)
+The SLM (Small Language Model) demo runs locally and does not require an API key.
+
+**Important: The first time you run the SLM demo, the application will download the model (~16 GB). Please ensure you have at least 20 GB of free disk space. This download only happens once.**
+
+### 6. Start the Demo
 Now you are ready to start the project demo. Run the following command in your terminal:
 
 ```bash
