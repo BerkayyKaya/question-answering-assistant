@@ -161,8 +161,14 @@ def initialize_decoder_tokenizer():
         print(f"Decoder Tokenizeri {local_tokenizer_path} Klasöründen Başarıyla Yüklendi!\n")
     else:
         print("Local Tokenizer Bulunamadı Online Olarak İndiriliyor...")
-        login(token=huggingface_api_key)
+        try:
+            login(token=huggingface_api_key) # Bu satır gated repolar içindir phi-3 modeli gated repo değildir.
+        except:
+            print("HuggingFace'e Giriş Yapılamadı!")
         tokenizer = AutoTokenizer.from_pretrained(decoder_name)
+        print(f"İndirilen Model Daha Sonra Kullanılabilmek İçin {local_tokenizer_path} Klasörüne Kaydediliyor...")
+        tokenizer.save_pretrained(local_tokenizer_path)
+        print(f"İndirilen Model Daha Sonra Kullanılabilmek İçin {local_tokenizer_path} Klasörüne Kaydedildi!")
         print("Tokenizer Başarıyla İndirildi!\n")
     return tokenizer
 
@@ -198,14 +204,23 @@ def initialize_decoder():
             print(f"Decoder Modeli {local_decoder_path} Klasöründen Başarıyla Yüklendi!")
     else:
         print("Local Model Bulunamadı Online Olarak İndiriliyor...")
-        login(token=huggingface_api_key)
+        try:
+            login(token=huggingface_api_key) # Bu satır gated repolar içindir phi-3 modeli gated repo değildir.
+        except:
+            print("HuggingFace'e Giriş Yapılamadı!")
         
         if quantization_config:
             print(f"Decoder modeli {torch.cuda.get_device_name(0)} isimli GPU üzerine yükleniyor...")
             model = AutoModelForCausalLM.from_pretrained(decoder_name, quantization_config=quantization_config, device_map="auto")
+            print(f"Model Daha Sonra Kullanılabilmek İçin {local_decoder_path} Klasörüne Kayıt Ediliyor...")
+            model.save_pretrained(local_decoder_path)
+            print(f"Model Daha Sonra Kullanılabilmek İçin {local_decoder_path} Klasörüne Kayıt Edildi!")
         else:
             print(f"Decoder modeli CPU üzerine yükleniyor...")
             model = AutoModelForCausalLM.from_pretrained(decoder_name, device_map="auto")
+            print(f"Model Daha Sonra Kullanılabilmek İçin {local_decoder_path} Klasörüne Kayıt Ediliyor...")
+            model.save_pretrained(local_decoder_path)
+            print(f"Model Daha Sonra Kullanılabilmek İçin {local_decoder_path} Klasörüne Kayıt Edildi!")
         print("Decoder Modeli Başarıyla Yüklendi!")
     
     return model
