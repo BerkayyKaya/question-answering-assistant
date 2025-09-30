@@ -23,7 +23,6 @@ When a user asks a specific question like "What was the temperature in the livin
 - General Knowledge Capability: The ability to answer general knowledge questions in addition to IoT data.
 
 - Interactive Interface: A user-friendly demo interface developed with Streamlit.
-Use the package manager
 
 ## Used Technologies
 - **Python**
