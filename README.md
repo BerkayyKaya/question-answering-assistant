@@ -1,3 +1,8 @@
+# Question-Answering Assistant
+| SLM DEMO | LLM DEMO |
+|---------|---------|
+| ![SLM DEMO](./images/slm_demo.png) | ![LLM DEMO](./images/llm_demo.png) |
+
 # Getting Started with IoT Data Question-Answering Assistant
 
 This page will help you get started with question-answering assistant.
